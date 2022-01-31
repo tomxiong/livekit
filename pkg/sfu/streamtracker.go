@@ -4,8 +4,6 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-
-	"github.com/livekit/protocol/utils"
 )
 
 type StreamStatus int32
@@ -39,6 +37,7 @@ type StreamTracker struct {
 
 	paused         atomicBool
 	countSinceLast uint32 // number of packets received since last check
+	running        chan struct{}
 	generation     atomicUint32
 
 	initMu      sync.Mutex
@@ -52,8 +51,6 @@ type StreamTracker struct {
 
 	// only access by the same goroutine as Observe
 	lastSN uint16
-
-	isStopped utils.AtomicFlag
 }
 
 func NewStreamTracker(samplesRequired uint32, cyclesRequired uint64, cycleDuration time.Duration) *StreamTracker {
@@ -77,31 +74,41 @@ func (s *StreamTracker) Status() StreamStatus {
 	return s.status
 }
 
-func (s *StreamTracker) maybeSetStatus(status StreamStatus) {
+func (s *StreamTracker) maybeSetActive() {
 	changed := false
 	s.statusMu.Lock()
-	if s.status != status {
-		s.status = status
+	if s.status != StreamStatusActive {
+		s.status = StreamStatusActive
 		changed = true
 	}
 	s.statusMu.Unlock()
 
 	if changed && s.onStatusChanged != nil {
-		s.onStatusChanged(status)
+		s.onStatusChanged(StreamStatusActive)
 	}
 }
 
-func (s *StreamTracker) maybeSetActive() {
-	s.maybeSetStatus(StreamStatusActive)
-}
-
 func (s *StreamTracker) maybeSetStopped() {
-	s.maybeSetStatus(StreamStatusStopped)
+	changed := false
+	s.statusMu.Lock()
+	if s.status != StreamStatusStopped {
+		s.status = StreamStatusStopped
+		changed = true
+	}
+	s.statusMu.Unlock()
+
+	if changed && s.onStatusChanged != nil {
+		s.onStatusChanged(StreamStatusStopped)
+	}
 }
 
 func (s *StreamTracker) init() {
 	s.maybeSetActive()
 
+	if s.isRunning() {
+		return
+	}
+	s.running = make(chan struct{})
 	go s.detectWorker(s.generation.get())
 }
 
@@ -109,23 +116,17 @@ func (s *StreamTracker) Start() {
 }
 
 func (s *StreamTracker) Stop() {
-	if !s.isStopped.TrySet(true) {
-		return
+	if s.running != nil {
+		close(s.running)
+		s.running = nil
 	}
-
-	// bump generation to trigger exit of worker
-	s.generation.add(1)
 }
 
 func (s *StreamTracker) Reset() {
-	if s.isStopped.Get() {
-		return
-	}
-
-	// bump generation to trigger exit of current worker
 	s.generation.add(1)
+	s.Stop()
 
-	atomic.StoreUint32(&s.countSinceLast, 0)
+	s.countSinceLast = 0
 	s.cycleCount = 0
 
 	s.initMu.Lock()
@@ -139,6 +140,18 @@ func (s *StreamTracker) Reset() {
 
 func (s *StreamTracker) SetPaused(paused bool) {
 	s.paused.set(paused)
+}
+
+func (s *StreamTracker) isRunning() bool {
+	if s.running == nil {
+		return false
+	}
+	select {
+	case <-s.running:
+		return false
+	default:
+		return true
+	}
 }
 
 // Observe a packet that's received
@@ -174,8 +187,11 @@ func (s *StreamTracker) Observe(sn uint16) {
 func (s *StreamTracker) detectWorker(generation uint32) {
 	ticker := time.NewTicker(s.cycleDuration)
 
-	for {
+	for s.isRunning() {
 		<-ticker.C
+		if !s.isRunning() {
+			return
+		}
 		if generation != s.generation.get() {
 			return
 		}
