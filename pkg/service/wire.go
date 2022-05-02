@@ -11,6 +11,7 @@ import (
 
 	"github.com/go-redis/redis/v8"
 	"github.com/google/wire"
+	"github.com/panjf2000/ants/v2"
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 
@@ -35,6 +36,7 @@ func InitializeServer(conf *config.Config, currentNode routing.LocalNode) (*Live
 		createKeyProvider,
 		createWebhookNotifier,
 		createClientConfiguration,
+		createAntsPool,
 		routing.CreateRouter,
 		getRoomConf,
 		wire.Bind(new(routing.MessageRouter), new(routing.Router)),
@@ -157,4 +159,8 @@ func createClientConfiguration() clientconfiguration.ClientConfigurationManager 
 
 func getRoomConf(config *config.Config) config.RoomConfig {
 	return config.Room
+}
+
+func createAntsPool() (*ants.Pool, error) {
+	return ants.NewPool(1000)
 }

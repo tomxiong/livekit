@@ -4,15 +4,15 @@ import (
 	"runtime"
 	"sync"
 
-	"go.uber.org/atomic"
-
 	"github.com/livekit/livekit-server/pkg/sfu/buffer"
 	"github.com/livekit/protocol/livekit"
 	"github.com/livekit/protocol/logger"
+	"github.com/panjf2000/ants/v2"
 )
 
 type DownTrackSpreaderParams struct {
 	Threshold int
+	AntsPool  *ants.Pool
 	Logger    logger.Logger
 }
 
@@ -101,47 +101,63 @@ func (d *DownTrackSpreader) HasDownTrack(peerID livekit.ParticipantID) bool {
 }
 
 func (d *DownTrackSpreader) Broadcast(layer int32, pkt *buffer.ExtPacket) {
-	d.downTrackMu.RLock()
-	downTracks := d.downTracks
-	free := d.free
-	d.downTrackMu.RUnlock()
+	/*
+		d.downTrackMu.RLock()
+		downTracks := d.downTracks
+		free := d.free
+		d.downTrackMu.RUnlock()
 
-	if d.params.Threshold == 0 || len(downTracks)-len(free) < d.params.Threshold {
-		// serial - not enough down tracks for parallelization to outweigh overhead
-		for _, dt := range downTracks {
-			if dt != nil {
-				d.writeRTP(layer, dt, pkt)
+		if d.params.Threshold == 0 || len(downTracks)-len(free) < d.params.Threshold {
+			// serial - not enough down tracks for parallelization to outweigh overhead
+			for _, dt := range downTracks {
+				if dt != nil {
+					d.writeRTP(layer, dt, pkt)
+				}
 			}
-		}
-	} else {
-		// parallel - enables much more efficient multi-core utilization
-		start := atomic.NewUint64(0)
-		end := uint64(len(downTracks))
+		} else {
+			// parallel - enables much more efficient multi-core utilization
+			start := atomic.NewUint64(0)
+			end := uint64(len(downTracks))
 
-		// 100µs is enough to amortize the overhead and provide sufficient load balancing.
-		// WriteRTP takes about 50µs on average, so we write to 2 down tracks per loop.
-		step := uint64(2)
+			// 100µs is enough to amortize the overhead and provide sufficient load balancing.
+			// WriteRTP takes about 50µs on average, so we write to 2 down tracks per loop.
+			step := uint64(2)
 
-		var wg sync.WaitGroup
-		wg.Add(d.numProcs)
-		for p := 0; p < d.numProcs; p++ {
-			go func() {
-				defer wg.Done()
-				for {
-					n := start.Add(step)
-					if n >= end+step {
-						return
-					}
+			var wg sync.WaitGroup
+			wg.Add(d.numProcs)
+			for p := 0; p < d.numProcs; p++ {
+				go func() {
+					defer wg.Done()
+					for {
+						n := start.Add(step)
+						if n >= end+step {
+							return
+						}
 
-					for i := n - step; i < n && i < end; i++ {
-						if dt := downTracks[i]; dt != nil {
-							d.writeRTP(layer, dt, pkt)
+						for i := n - step; i < n && i < end; i++ {
+							if dt := downTracks[i]; dt != nil {
+								d.writeRTP(layer, dt, pkt)
+							}
 						}
 					}
-				}
-			}()
+				}()
+			}
+			wg.Wait()
 		}
-		wg.Wait()
+	*/
+
+	d.downTrackMu.RLock()
+	downTracks := d.downTracks
+	d.downTrackMu.RUnlock()
+
+	for _, dt := range downTracks {
+		if dt == nil {
+			continue
+		}
+
+		d.params.AntsPool.Submit(func() {
+			d.writeRTP(layer, dt, pkt)
+		})
 	}
 }
 

@@ -18,6 +18,7 @@ require (
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.3.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.5
+	github.com/panjf2000/ants/v2 v2.4.8
 	github.com/pion/ice/v2 v2.2.5
 	github.com/pion/interceptor v0.1.10
 	github.com/pion/logging v0.2.2
@@ -31,7 +32,6 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.11.0
 	github.com/rs/cors v1.8.2
-	github.com/rs/zerolog v1.26.0
 	github.com/sebest/xff v0.0.0-20210106013422-671bd2870b3a
 	github.com/stretchr/testify v1.7.1
 	github.com/thoas/go-funk v0.8.0

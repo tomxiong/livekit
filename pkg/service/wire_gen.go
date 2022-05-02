@@ -19,6 +19,7 @@ import (
 	"github.com/livekit/protocol/logger"
 	"github.com/livekit/protocol/utils"
 	"github.com/livekit/protocol/webhook"
+	"github.com/panjf2000/ants/v2"
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 	"os"
@@ -57,7 +58,11 @@ func InitializeServer(conf *config.Config, currentNode routing.LocalNode) (*Live
 	recordingService := NewRecordingService(messageBus, telemetryService)
 	rtcService := NewRTCService(conf, roomAllocator, objectStore, router, currentNode)
 	clientConfigurationManager := createClientConfiguration()
-	roomManager, err := NewLocalRoomManager(conf, objectStore, currentNode, router, telemetryService, clientConfigurationManager)
+	pool, err := createAntsPool()
+	if err != nil {
+		return nil, err
+	}
+	roomManager, err := NewLocalRoomManager(conf, objectStore, currentNode, router, telemetryService, clientConfigurationManager, pool)
 	if err != nil {
 		return nil, err
 	}
@@ -177,4 +182,8 @@ func createClientConfiguration() clientconfiguration.ClientConfigurationManager 
 
 func getRoomConf(config2 *config.Config) config.RoomConfig {
 	return config2.Room
+}
+
+func createAntsPool() (*ants.Pool, error) {
+	return ants.NewPool(1000)
 }

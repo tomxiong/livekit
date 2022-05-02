@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/go-logr/logr"
+	"github.com/panjf2000/ants/v2"
 	"github.com/pion/rtcp"
 	"github.com/pion/webrtc/v3"
 	"go.uber.org/atomic"
@@ -150,6 +151,7 @@ func NewWebRTCReceiver(
 	source livekit.TrackSource,
 	logger logger.Logger,
 	twcc *twcc.Responder,
+	antsPool *ants.Pool,
 	opts ...ReceiverOpts,
 ) *WebRTCReceiver {
 	w := &WebRTCReceiver{
@@ -174,6 +176,7 @@ func NewWebRTCReceiver(
 
 	w.downTrackSpreader = NewDownTrackSpreader(DownTrackSpreaderParams{
 		Threshold: w.lbThreshold,
+		AntsPool:  antsPool,
 		Logger:    logger,
 	})
 

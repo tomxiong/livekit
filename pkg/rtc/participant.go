@@ -8,6 +8,7 @@ import (
 	"time"
 
 	lru "github.com/hashicorp/golang-lru"
+	"github.com/panjf2000/ants/v2"
 	"github.com/pion/rtcp"
 	"github.com/pion/webrtc/v3"
 	"github.com/pkg/errors"
@@ -66,6 +67,7 @@ type ParticipantParams struct {
 	Region                  string
 	Migration               bool
 	AdaptiveStream          bool
+	AntsPool                *ants.Pool
 }
 
 type ParticipantImpl struct {
@@ -1458,6 +1460,7 @@ func (p *ParticipantImpl) mediaTrackReceived(track *webrtc.TrackRemote, rtpRecei
 			Logger:              LoggerWithTrack(p.params.Logger, livekit.TrackID(ti.Sid)),
 			SubscriberConfig:    p.params.Config.Subscriber,
 			PLIThrottleConfig:   p.params.PLIThrottleConfig,
+			AntsPool:            p.params.AntsPool,
 		})
 
 		for ssrc, info := range p.params.SimTracks {

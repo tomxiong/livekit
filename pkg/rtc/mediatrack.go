@@ -4,6 +4,7 @@ import (
 	"context"
 	"sync"
 
+	"github.com/panjf2000/ants/v2"
 	"github.com/pion/rtcp"
 	"github.com/pion/webrtc/v3"
 	"go.uber.org/atomic"
@@ -48,6 +49,7 @@ type MediaTrackParams struct {
 	VideoConfig       config.VideoConfig
 	Telemetry         telemetry.TelemetryService
 	Logger            logger.Logger
+	AntsPool          *ants.Pool
 }
 
 func NewMediaTrack(params MediaTrackParams) *MediaTrack {
@@ -144,6 +146,7 @@ func (t *MediaTrack) AddReceiver(receiver *webrtc.RTPReceiver, track *webrtc.Tra
 			t.params.TrackInfo.Source,
 			t.params.Logger,
 			twcc,
+			t.params.AntsPool,
 			sfu.WithPliThrottleConfig(t.params.PLIThrottleConfig),
 			sfu.WithAudioConfig(t.params.AudioConfig),
 			sfu.WithLoadBalanceThreshold(20),

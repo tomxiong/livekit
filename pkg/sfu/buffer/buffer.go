@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/gammazero/deque"
+	"github.com/pion/ion-sfu/pkg/buffer"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
 	"github.com/pion/sdp/v3"
@@ -31,7 +32,7 @@ type pendingPacket struct {
 }
 
 type ExtPacket struct {
-	Head          bool
+	//Head          bool
 	Arrival       int64
 	Packet        *rtp.Packet
 	Payload       interface{}
@@ -364,14 +365,25 @@ func (b *Buffer) calc(pkt []byte, arrivalTime int64) {
 		return
 	}
 
-	flowState := b.updateStreamState(&p, arrivalTime)
+	//flowState := b.updateStreamState(&p, arrivalTime)
+	b.updateStreamState(&p, arrivalTime)
 	b.processHeaderExtensions(&p, arrivalTime)
 
-	ep := b.getExtPacket(pb, &p, arrivalTime, flowState.IsHighestSN)
+	//ep := b.getExtPacket(pb, &p, arrivalTime, flowState.IsHighestSN)
+	ep := b.getExtPacket(pb, &p, arrivalTime)
 	if ep == nil {
 		return
 	}
-	b.extPackets.PushBack(ep)
+	//b.extPackets.PushBack(ep)
+	insertIdx := 0
+	for idx := b.extPackets.Len() - 1; idx >= 0; idx-- {
+		qpkt := b.extPackets.At(idx).(*buffer.ExtPacket)
+		if (pkt.Packet.SequenceNumber - qpkt.Packet.SequenceNumber) < (1 << 15) {
+			insertIdx = idx + 1
+			break
+		}
+	}
+	b.extPackets.Insert(inserIdx, pkt)
 
 	b.doNACKs()
 
@@ -424,9 +436,10 @@ func (b *Buffer) processHeaderExtensions(p *rtp.Packet, arrivalTime int64) {
 	}
 }
 
-func (b *Buffer) getExtPacket(rawPacket []byte, rtpPacket *rtp.Packet, arrivalTime int64, isHighestSN bool) *ExtPacket {
+//func (b *Buffer) getExtPacket(rawPacket []byte, rtpPacket *rtp.Packet, arrivalTime int64, isHighestSN bool) *ExtPacket {
+func (b *Buffer) getExtPacket(rawPacket []byte, rtpPacket *rtp.Packet, arrivalTime int64) *ExtPacket {
 	ep := &ExtPacket{
-		Head:          isHighestSN,
+		//Head:          isHighestSN,
 		Packet:        rtpPacket,
 		Arrival:       arrivalTime,
 		RawPacket:     rawPacket,

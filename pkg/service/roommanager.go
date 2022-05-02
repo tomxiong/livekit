@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/panjf2000/ants/v2"
 	"github.com/pkg/errors"
 
 	"github.com/livekit/protocol/auth"
@@ -39,6 +40,7 @@ type RoomManager struct {
 	roomStore         ObjectStore
 	telemetry         telemetry.TelemetryService
 	clientConfManager clientconfiguration.ClientConfigurationManager
+	antsPool          *ants.Pool
 
 	rooms map[livekit.RoomName]*rtc.Room
 }
@@ -50,11 +52,16 @@ func NewLocalRoomManager(
 	router routing.Router,
 	telemetry telemetry.TelemetryService,
 	clientConfManager clientconfiguration.ClientConfigurationManager,
+	antsPool *ants.Pool,
 ) (*RoomManager, error) {
 
 	rtcConf, err := rtc.NewWebRTCConfig(conf, currentNode.Ip)
 	if err != nil {
 		return nil, err
+	}
+
+	if antsPool == nil {
+		return nil, fmt.Errorf("empty ants pool")
 	}
 
 	r := &RoomManager{
@@ -65,6 +72,7 @@ func NewLocalRoomManager(
 		roomStore:         roomStore,
 		telemetry:         telemetry,
 		clientConfManager: clientConfManager,
+		antsPool:          antsPool,
 
 		rooms: make(map[livekit.RoomName]*rtc.Room),
 	}
@@ -257,6 +265,7 @@ func (r *RoomManager) StartSession(
 		ClientConf:              clientConf,
 		Region:                  pi.Region,
 		AdaptiveStream:          pi.AdaptiveStream,
+		AntsPool:                r.antsPool,
 	})
 	if err != nil {
 		return err
