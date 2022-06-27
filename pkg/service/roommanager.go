@@ -209,7 +209,7 @@ func (r *RoomManager) StartSession(
 		} else {
 			participant.GetLogger().Infow("removing duplicate participant")
 			// we need to clean up the existing participant, so a new one can join
-			room.RemoveParticipant(participant.Identity(), types.ParticipantCloseReasonDuplicateIdentity)
+			room.RemoveParticipant(participant, types.ParticipantCloseReasonDuplicateIdentity)
 		}
 	} else if pi.Reconnect {
 		// send leave request if participant is trying to reconnect without keep subscribe state
@@ -473,7 +473,7 @@ func (r *RoomManager) handleRTCMessage(ctx context.Context, roomName livekit.Roo
 			return
 		}
 		pLogger.Infow("removing participant")
-		room.RemoveParticipant(identity, types.ParticipantCloseReasonServiceRequestRemoveParticipant)
+		room.RemoveParticipant(participant, types.ParticipantCloseReasonServiceRequestRemoveParticipant)
 	case *livekit.RTCNodeMessage_MuteTrack:
 		if participant == nil {
 			return

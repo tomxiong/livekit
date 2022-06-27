@@ -29,10 +29,10 @@ type FakeRoom struct {
 	nameReturnsOnCall map[int]struct {
 		result1 livekit.RoomName
 	}
-	RemoveParticipantStub        func(livekit.ParticipantIdentity, types.ParticipantCloseReason)
+	RemoveParticipantStub        func(types.LocalParticipant, types.ParticipantCloseReason)
 	removeParticipantMutex       sync.RWMutex
 	removeParticipantArgsForCall []struct {
-		arg1 livekit.ParticipantIdentity
+		arg1 types.LocalParticipant
 		arg2 types.ParticipantCloseReason
 	}
 	SetParticipantPermissionStub        func(types.LocalParticipant, *livekit.ParticipantPermission) error
@@ -219,10 +219,10 @@ func (fake *FakeRoom) NameReturnsOnCall(i int, result1 livekit.RoomName) {
 	}{result1}
 }
 
-func (fake *FakeRoom) RemoveParticipant(arg1 livekit.ParticipantIdentity, arg2 types.ParticipantCloseReason) {
+func (fake *FakeRoom) RemoveParticipant(arg1 types.LocalParticipant, arg2 types.ParticipantCloseReason) {
 	fake.removeParticipantMutex.Lock()
 	fake.removeParticipantArgsForCall = append(fake.removeParticipantArgsForCall, struct {
-		arg1 livekit.ParticipantIdentity
+		arg1 types.LocalParticipant
 		arg2 types.ParticipantCloseReason
 	}{arg1, arg2})
 	stub := fake.RemoveParticipantStub
@@ -239,13 +239,13 @@ func (fake *FakeRoom) RemoveParticipantCallCount() int {
 	return len(fake.removeParticipantArgsForCall)
 }
 
-func (fake *FakeRoom) RemoveParticipantCalls(stub func(livekit.ParticipantIdentity, types.ParticipantCloseReason)) {
+func (fake *FakeRoom) RemoveParticipantCalls(stub func(types.LocalParticipant, types.ParticipantCloseReason)) {
 	fake.removeParticipantMutex.Lock()
 	defer fake.removeParticipantMutex.Unlock()
 	fake.RemoveParticipantStub = stub
 }
 
-func (fake *FakeRoom) RemoveParticipantArgsForCall(i int) (livekit.ParticipantIdentity, types.ParticipantCloseReason) {
+func (fake *FakeRoom) RemoveParticipantArgsForCall(i int) (types.LocalParticipant, types.ParticipantCloseReason) {
 	fake.removeParticipantMutex.RLock()
 	defer fake.removeParticipantMutex.RUnlock()
 	argsForCall := fake.removeParticipantArgsForCall[i]

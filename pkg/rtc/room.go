@@ -246,7 +246,7 @@ func (r *Room) Join(participant types.LocalParticipant, opts *ParticipantOptions
 			r.telemetry.ParticipantActive(context.Background(), r.ToProto(), p.ToProto(), &livekit.AnalyticsClientMeta{ClientConnectTime: uint32(time.Since(p.ConnectedAt()).Milliseconds())})
 		} else if state == livekit.ParticipantInfo_DISCONNECTED {
 			// remove participant from room
-			go r.RemoveParticipant(p.Identity(), types.ParticipantCloseReasonStateDisconnected)
+			go r.RemoveParticipant(p, types.ParticipantCloseReasonStateDisconnected)
 		}
 	})
 	participant.OnTrackUpdated(r.onTrackUpdated)
@@ -302,7 +302,7 @@ func (r *Room) Join(participant types.LocalParticipant, opts *ParticipantOptions
 	time.AfterFunc(time.Minute, func() {
 		state := participant.State()
 		if state == livekit.ParticipantInfo_JOINING || state == livekit.ParticipantInfo_JOINED {
-			r.RemoveParticipant(participant.Identity(), types.ParticipantCloseReasonJoinTimeout)
+			r.RemoveParticipant(participant, types.ParticipantCloseReasonJoinTimeout)
 		}
 	})
 
@@ -348,19 +348,23 @@ func (r *Room) ResumeParticipant(p types.LocalParticipant, responseSink routing.
 	return nil
 }
 
-func (r *Room) RemoveParticipant(identity livekit.ParticipantIdentity, reason types.ParticipantCloseReason) {
+func (r *Room) RemoveParticipant(participant types.LocalParticipant, reason types.ParticipantCloseReason) {
+	found := false
 	r.lock.Lock()
-	p, ok := r.participants[identity]
-	if ok {
-		delete(r.participants, identity)
-		delete(r.participantOpts, identity)
-		if !p.Hidden() {
-			r.protoRoom.NumParticipants--
+	for identity, p := range r.participants {
+		if p == participant {
+			found = true
+			delete(r.participants, identity)
+			delete(r.participantOpts, identity)
+			if !p.Hidden() {
+				r.protoRoom.NumParticipants--
+			}
+			break
 		}
 	}
 
 	activeRecording := false
-	if (p != nil && p.IsRecorder()) || p == nil && r.protoRoom.ActiveRecording {
+	if r.protoRoom.ActiveRecording {
 		for _, op := range r.participants {
 			if op.IsRecorder() {
 				activeRecording = true
@@ -375,23 +379,19 @@ func (r *Room) RemoveParticipant(identity livekit.ParticipantIdentity, reason ty
 	}
 	r.lock.Unlock()
 
-	if !ok {
-		return
-	}
-
 	// send broadcast only if it's not already closed
-	sendUpdates := p.State() != livekit.ParticipantInfo_DISCONNECTED
+	sendUpdates := found && participant.State() != livekit.ParticipantInfo_DISCONNECTED
 
-	p.OnTrackUpdated(nil)
-	p.OnTrackPublished(nil)
-	p.OnStateChange(nil)
-	p.OnParticipantUpdate(nil)
-	p.OnDataPacket(nil)
-	p.OnSubscribedTo(nil)
+	participant.OnTrackUpdated(nil)
+	participant.OnTrackPublished(nil)
+	participant.OnStateChange(nil)
+	participant.OnParticipantUpdate(nil)
+	participant.OnDataPacket(nil)
+	participant.OnSubscribedTo(nil)
 
 	// close participant as well
-	r.Logger.Infow("closing participant for removal", "pID", p.ID(), "participant", p.Identity())
-	_ = p.Close(true, reason)
+	r.Logger.Infow("closing participant for removal", "pID", participant.ID(), "participant", participant.Identity())
+	_ = participant.Close(true, reason)
 
 	r.lock.RLock()
 	if len(r.participants) == 0 {
@@ -401,9 +401,9 @@ func (r *Room) RemoveParticipant(identity livekit.ParticipantIdentity, reason ty
 
 	if sendUpdates {
 		if r.onParticipantChanged != nil {
-			r.onParticipantChanged(p)
+			r.onParticipantChanged(participant)
 		}
-		r.broadcastParticipantState(p, broadcastOptions{skipSource: true})
+		r.broadcastParticipantState(participant, broadcastOptions{skipSource: true})
 	}
 }
 
