@@ -489,10 +489,10 @@ func (t *MediaTrackSubscriptions) OnSubscribedMaxQualityChange(f func(subscribed
 }
 
 func (t *MediaTrackSubscriptions) notifySubscriberMaxQuality(subscriberID livekit.ParticipantID, codec webrtc.RTPCodecCapability, quality livekit.VideoQuality) {
-	t.params.Logger.Debugw("notifying subscriber max quality", "subscriberID", subscriberID, "codec", codec, "quality", quality)
 	if t.params.MediaTrack.Kind() != livekit.TrackType_VIDEO {
 		return
 	}
+	t.params.Logger.Debugw("notifying subscriber max quality", "subscriberID", subscriberID, "codec", codec, "quality", quality)
 
 	if codec.MimeType == "" {
 		t.params.Logger.Errorw("codec mime type is empty", nil)
