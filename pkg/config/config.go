@@ -128,6 +128,7 @@ type RedisConfig struct {
 	SentinelUsername  string   `yaml:"sentinel_username"`
 	SentinelPassword  string   `yaml:"sentinel_password"`
 	SentinelAddresses []string `yaml:"sentinel_addresses"`
+	ClusterAddresses  []string `yaml:"cluster_addresses"`
 }
 
 type RoomConfig struct {
@@ -312,6 +313,10 @@ func (conf *Config) HasRedis() bool {
 
 func (conf *Config) UseSentinel() bool {
 	return conf.Redis.SentinelAddresses != nil
+}
+
+func (conf *Config) UseCluster() bool {
+	return conf.Redis.ClusterAddresses != nil
 }
 
 func (conf *Config) updateFromCLI(c *cli.Context) error {

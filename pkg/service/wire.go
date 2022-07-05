@@ -125,7 +125,15 @@ func createRedisClient(conf *config.Config) (*redis.Client, error) {
 		}
 	}
 
-	if conf.UseSentinel() {
+	if conf.UseCluster() {
+		logger.Infow("using multi-node routing via redis", "cluster", true, "addr", conf.Redis.ClusterAddresses)
+		rcOptions := &redis.ClusterOptions{
+			Addrs:     conf.Redis.ClusterAddresses,
+			Password:  conf.Redis.Password,
+			TLSConfig: tlsConfig,
+		}
+		rc = redis.NewClusterClient(rcOptions)
+	} else if conf.UseSentinel() {
 		logger.Infow("using multi-node routing via redis", "sentinel", true, "addr", conf.Redis.SentinelAddresses, "masterName", conf.Redis.MasterName)
 		rcOptions := &redis.FailoverOptions{
 			SentinelAddrs:    conf.Redis.SentinelAddresses,
@@ -139,7 +147,7 @@ func createRedisClient(conf *config.Config) (*redis.Client, error) {
 		}
 		rc = redis.NewFailoverClient(rcOptions)
 	} else {
-		logger.Infow("using multi-node routing via redis", "sentinel", false, "addr", conf.Redis.Address)
+		logger.Infow("using single-node redis", "single", true, "addr", conf.Redis.Address)
 		rcOptions := &redis.Options{
 			Addr:      conf.Redis.Address,
 			Username:  conf.Redis.Username,
