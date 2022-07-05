@@ -11,18 +11,18 @@ import (
 
 	"github.com/google/wire"
 	"github.com/pkg/errors"
-	"github.com/tomxiong/livekit-protocol/auth"
-	"github.com/tomxiong/livekit-protocol/egress"
-	"github.com/tomxiong/livekit-protocol/livekit"
-	"github.com/tomxiong/livekit-protocol/logger"
-	"github.com/tomxiong/livekit-protocol/utils"
-	"github.com/tomxiong/livekit-protocol/webhook"
+	"github.com/tomxiong/protocol/auth"
+	"github.com/tomxiong/protocol/egress"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
+	"github.com/tomxiong/protocol/utils"
+	"github.com/tomxiong/protocol/webhook"
 
 	"github.com/livekit/livekit-server/pkg/clientconfiguration"
 	"github.com/livekit/livekit-server/pkg/config"
 	"github.com/livekit/livekit-server/pkg/routing"
 	"github.com/livekit/livekit-server/pkg/telemetry"
-	redisClient "github.com/tomxiong/livekit-protocol/utils/redis"
+	redisClient "github.com/tomxiong/protocol/utils/redis"
 )
 
 func InitializeServer(conf *config.Config, currentNode routing.LocalNode) (*LivekitServer, error) {
