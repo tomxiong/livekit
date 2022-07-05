@@ -9,8 +9,11 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/go-redis/redis/v8"
 	"github.com/google/wire"
 	"github.com/pkg/errors"
+	"gopkg.in/yaml.v3"
+
 	"github.com/tomxiong/protocol/auth"
 	"github.com/tomxiong/protocol/egress"
 	"github.com/tomxiong/protocol/livekit"
@@ -168,7 +171,7 @@ func createMessageBus(rc redisClient.RedisClient) utils.MessageBus {
 	if rc == nil {
 		return nil
 	}
-	return utils.NewRedisMessageBus(*rc)
+	return utils.NewRedisMessageBus(rc)
 }
 
 func createStore(rc redisClient.RedisClient) ObjectStore {
