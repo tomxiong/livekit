@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 )
 
 func TestScriptMatchConfiguration(t *testing.T) {

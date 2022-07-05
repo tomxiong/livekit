@@ -7,7 +7,7 @@ import (
 
 	dd "github.com/livekit/livekit-server/pkg/sfu/dependencydescriptor"
 
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/logger"
 )
 
 type DependencyDescriptorParser struct {

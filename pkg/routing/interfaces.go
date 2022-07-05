@@ -3,13 +3,13 @@ package routing
 import (
 	"context"
 	"encoding/json"
+	redisClient "github.com/tomxiong/protocol/utils/redis"
 
-	"github.com/go-redis/redis/v8"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/livekit/protocol/auth"
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/auth"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
 )
 
 //go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -generate
@@ -92,7 +92,7 @@ type MessageRouter interface {
 	WriteRoomRTC(ctx context.Context, roomName livekit.RoomName, msg *livekit.RTCNodeMessage) error
 }
 
-func CreateRouter(rc *redis.Client, node LocalNode) Router {
+func CreateRouter(rc redisClient.RedisClient, node LocalNode) Router {
 	if rc != nil {
 		return NewRedisRouter(node, rc)
 	}

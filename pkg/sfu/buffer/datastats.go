@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 )
 
 type DataStatsParam struct {

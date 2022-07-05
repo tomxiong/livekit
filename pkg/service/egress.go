@@ -7,9 +7,9 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	"github.com/livekit/protocol/egress"
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/egress"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
 
 	"github.com/livekit/livekit-server/pkg/telemetry"
 )

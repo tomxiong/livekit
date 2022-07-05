@@ -13,7 +13,7 @@ import (
 	logging "github.com/livekit/livekit-server/pkg/logger"
 	"github.com/livekit/livekit-server/pkg/sfu/buffer"
 	dd "github.com/livekit/livekit-server/pkg/sfu/dependencydescriptor"
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/logger"
 )
 
 const (

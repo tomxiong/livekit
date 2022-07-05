@@ -8,10 +8,10 @@ import (
 	"github.com/livekit/livekit-server/pkg/routing"
 	"github.com/livekit/livekit-server/pkg/rtc/types"
 	"github.com/livekit/livekit-server/pkg/sfu"
-	"github.com/livekit/protocol/auth"
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
 	webrtc "github.com/pion/webrtc/v3"
+	"github.com/tomxiong/protocol/auth"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
 )
 
 type FakeLocalParticipant struct {

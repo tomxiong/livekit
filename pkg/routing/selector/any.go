@@ -1,7 +1,7 @@
 package selector
 
 import (
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 )
 
 // AnySelector selects any available node with no limitations

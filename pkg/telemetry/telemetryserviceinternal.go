@@ -6,8 +6,8 @@ import (
 
 	"github.com/gammazero/workerpool"
 
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/webhook"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/webhook"
 
 	"github.com/livekit/livekit-server/pkg/telemetry/prometheus"
 )

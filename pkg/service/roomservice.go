@@ -12,7 +12,7 @@ import (
 
 	"github.com/livekit/livekit-server/pkg/config"
 	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 )
 
 const (

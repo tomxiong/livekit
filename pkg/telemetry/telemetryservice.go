@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
-	"github.com/livekit/protocol/webhook"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
+	"github.com/tomxiong/protocol/webhook"
 )
 
 //go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 . TelemetryService

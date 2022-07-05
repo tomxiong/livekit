@@ -6,10 +6,10 @@ import (
 
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
-	"github.com/livekit/protocol/utils"
-	"github.com/livekit/protocol/webhook"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
+	"github.com/tomxiong/protocol/utils"
+	"github.com/tomxiong/protocol/webhook"
 
 	"github.com/livekit/livekit-server/pkg/telemetry/prometheus"
 )

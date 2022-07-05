@@ -9,14 +9,14 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/atomic"
 
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 
 	"github.com/livekit/livekit-server/pkg/service"
 )
 
 func TestParticipantPersistence(t *testing.T) {
 	ctx := context.Background()
-	rs := service.NewRedisStore(redisClient())
+	rs := service.NewRedisStore(newRedisClient())
 
 	roomName := livekit.RoomName("room1")
 	_ = rs.DeleteRoom(ctx, roomName)
@@ -63,7 +63,7 @@ func TestParticipantPersistence(t *testing.T) {
 
 func TestRoomLock(t *testing.T) {
 	ctx := context.Background()
-	rs := service.NewRedisStore(redisClient())
+	rs := service.NewRedisStore(newRedisClient())
 	lockInterval := 5 * time.Millisecond
 	roomName := livekit.RoomName("myroom")
 

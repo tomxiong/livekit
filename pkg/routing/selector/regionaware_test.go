@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/utils"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/utils"
 
 	"github.com/livekit/livekit-server/pkg/config"
 	"github.com/livekit/livekit-server/pkg/routing/selector"

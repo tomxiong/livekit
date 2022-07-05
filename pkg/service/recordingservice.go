@@ -7,10 +7,10 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/emptypb"
 
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
-	"github.com/livekit/protocol/recording"
-	"github.com/livekit/protocol/utils"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
+	"github.com/tomxiong/protocol/recording"
+	"github.com/tomxiong/protocol/utils"
 
 	"github.com/livekit/livekit-server/pkg/telemetry"
 )

@@ -3,6 +3,7 @@ package routing
 import (
 	"bytes"
 	"context"
+	redisClient "github.com/tomxiong/protocol/utils/redis"
 	"runtime/pprof"
 	"sync"
 	"time"
@@ -12,9 +13,9 @@ import (
 	"go.uber.org/atomic"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
-	"github.com/livekit/protocol/utils"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
+	"github.com/tomxiong/protocol/utils"
 
 	"github.com/livekit/livekit-server/pkg/routing/selector"
 	"github.com/livekit/livekit-server/pkg/telemetry/prometheus"
@@ -33,7 +34,7 @@ const (
 type RedisRouter struct {
 	LocalRouter
 
-	rc        *redis.Client
+	rc        redisClient.RedisClient
 	ctx       context.Context
 	isStarted atomic.Bool
 	nodeMu    sync.RWMutex
@@ -44,7 +45,7 @@ type RedisRouter struct {
 	cancel func()
 }
 
-func NewRedisRouter(currentNode LocalNode, rc *redis.Client) *RedisRouter {
+func NewRedisRouter(currentNode LocalNode, rc redisClient.RedisClient) *RedisRouter {
 	rr := &RedisRouter{
 		LocalRouter: *NewLocalRouter(currentNode),
 		rc:          rc,

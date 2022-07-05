@@ -3,7 +3,7 @@ package selector
 import (
 	"math"
 
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 
 	"github.com/livekit/livekit-server/pkg/config"
 )

@@ -6,7 +6,7 @@ import (
 	"github.com/pion/webrtc/v3"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 
 	"github.com/livekit/livekit-server/pkg/routing"
 	"github.com/livekit/livekit-server/version"

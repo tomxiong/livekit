@@ -7,9 +7,10 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/livekit/livekit-server/pkg/service"
+	redisClient "github.com/tomxiong/protocol/utils/redis"
 )
 
-func redisClient() *redis.Client {
+func newRedisClient() redisClient.RedisClient {
 	return redis.NewClient(&redis.Options{
 		Addr: "localhost:6379",
 	})

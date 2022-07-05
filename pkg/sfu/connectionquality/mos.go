@@ -3,8 +3,8 @@ package connectionquality
 import (
 	"time"
 
-	"github.com/livekit/protocol/livekit"
 	"github.com/livekit/rtcscore-go/pkg/rtcmos"
+	"github.com/tomxiong/protocol/livekit"
 )
 
 func Score2Rating(score float32) livekit.ConnectionQuality {

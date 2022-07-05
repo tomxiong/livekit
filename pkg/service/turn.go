@@ -9,8 +9,8 @@ import (
 	"github.com/pion/turn/v2"
 	"github.com/pkg/errors"
 
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
 
 	"github.com/livekit/livekit-server/pkg/config"
 	logging "github.com/livekit/livekit-server/pkg/logger"

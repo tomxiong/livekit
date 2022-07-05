@@ -2,12 +2,12 @@ package routing
 
 import (
 	"context"
+	redisClient "github.com/tomxiong/protocol/utils/redis"
 
-	"github.com/go-redis/redis/v8"
 	"go.uber.org/atomic"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 )
 
 const (
@@ -38,7 +38,7 @@ func signalNodeChannel(nodeID livekit.NodeID) string {
 	return "signal_channel:" + string(nodeID)
 }
 
-func publishRTCMessage(rc *redis.Client, nodeID livekit.NodeID, participantKey livekit.ParticipantKey, msg proto.Message) error {
+func publishRTCMessage(rc redisClient.RedisClient, nodeID livekit.NodeID, participantKey livekit.ParticipantKey, msg proto.Message) error {
 	rm := &livekit.RTCNodeMessage{
 		ParticipantKey: string(participantKey),
 	}
@@ -67,7 +67,7 @@ func publishRTCMessage(rc *redis.Client, nodeID livekit.NodeID, participantKey l
 	return rc.Publish(redisCtx, rtcNodeChannel(nodeID), data).Err()
 }
 
-func publishSignalMessage(rc *redis.Client, nodeID livekit.NodeID, connectionID livekit.ConnectionID, msg proto.Message) error {
+func publishSignalMessage(rc redisClient.RedisClient, nodeID livekit.NodeID, connectionID livekit.ConnectionID, msg proto.Message) error {
 	rm := &livekit.SignalNodeMessage{
 		ConnectionId: string(connectionID),
 	}
@@ -94,14 +94,14 @@ func publishSignalMessage(rc *redis.Client, nodeID livekit.NodeID, connectionID 
 }
 
 type RTCNodeSink struct {
-	rc             *redis.Client
+	rc             redisClient.RedisClient
 	nodeID         livekit.NodeID
 	participantKey livekit.ParticipantKey
 	isClosed       atomic.Bool
 	onClose        func()
 }
 
-func NewRTCNodeSink(rc *redis.Client, nodeID livekit.NodeID, participantKey livekit.ParticipantKey) *RTCNodeSink {
+func NewRTCNodeSink(rc redisClient.RedisClient, nodeID livekit.NodeID, participantKey livekit.ParticipantKey) *RTCNodeSink {
 	return &RTCNodeSink{
 		rc:             rc,
 		nodeID:         nodeID,
@@ -130,14 +130,14 @@ func (s *RTCNodeSink) OnClose(f func()) {
 }
 
 type SignalNodeSink struct {
-	rc           *redis.Client
+	rc           redisClient.RedisClient
 	nodeID       livekit.NodeID
 	connectionID livekit.ConnectionID
 	isClosed     atomic.Bool
 	onClose      func()
 }
 
-func NewSignalNodeSink(rc *redis.Client, nodeID livekit.NodeID, connectionID livekit.ConnectionID) *SignalNodeSink {
+func NewSignalNodeSink(rc redisClient.RedisClient, nodeID livekit.NodeID, connectionID livekit.ConnectionID) *SignalNodeSink {
 	return &SignalNodeSink{
 		rc:           rc,
 		nodeID:       nodeID,

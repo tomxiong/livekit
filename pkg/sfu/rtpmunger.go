@@ -1,7 +1,7 @@
 package sfu
 
 import (
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/logger"
 
 	"github.com/livekit/livekit-server/pkg/sfu/buffer"
 )

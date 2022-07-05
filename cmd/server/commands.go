@@ -12,8 +12,8 @@ import (
 	"github.com/urfave/cli/v2"
 	"gopkg.in/yaml.v3"
 
-	"github.com/livekit/protocol/auth"
-	"github.com/livekit/protocol/utils"
+	"github.com/tomxiong/protocol/auth"
+	"github.com/tomxiong/protocol/utils"
 
 	"github.com/livekit/livekit-server/pkg/routing"
 	"github.com/livekit/livekit-server/pkg/service"

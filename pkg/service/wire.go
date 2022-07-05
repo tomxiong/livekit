@@ -9,22 +9,20 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/go-redis/redis/v8"
 	"github.com/google/wire"
 	"github.com/pkg/errors"
-	"gopkg.in/yaml.v3"
-
-	"github.com/livekit/protocol/auth"
-	"github.com/livekit/protocol/egress"
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
-	"github.com/livekit/protocol/utils"
-	"github.com/livekit/protocol/webhook"
+	"github.com/tomxiong/livekit-protocol/auth"
+	"github.com/tomxiong/livekit-protocol/egress"
+	"github.com/tomxiong/livekit-protocol/livekit"
+	"github.com/tomxiong/livekit-protocol/logger"
+	"github.com/tomxiong/livekit-protocol/utils"
+	"github.com/tomxiong/livekit-protocol/webhook"
 
 	"github.com/livekit/livekit-server/pkg/clientconfiguration"
 	"github.com/livekit/livekit-server/pkg/config"
 	"github.com/livekit/livekit-server/pkg/routing"
 	"github.com/livekit/livekit-server/pkg/telemetry"
+	redisClient "github.com/tomxiong/livekit-protocol/utils/redis"
 )
 
 func InitializeServer(conf *config.Config, currentNode routing.LocalNode) (*LivekitServer, error) {
@@ -111,12 +109,12 @@ func createWebhookNotifier(conf *config.Config, provider auth.KeyProvider) (webh
 	return webhook.NewNotifier(wc.APIKey, secret, wc.URLs), nil
 }
 
-func createRedisClient(conf *config.Config) (*redis.Client, error) {
+func createRedisClient(conf *config.Config) (redisClient.RedisClient, error) {
 	if !conf.HasRedis() {
 		return nil, nil
 	}
 
-	var rc *redis.Client
+	var rc redisClient.RedisClient
 	var tlsConfig *tls.Config
 
 	if conf.Redis.UseTLS {
@@ -166,14 +164,14 @@ func createRedisClient(conf *config.Config) (*redis.Client, error) {
 	return rc, nil
 }
 
-func createMessageBus(rc *redis.Client) utils.MessageBus {
+func createMessageBus(rc redisClient.RedisClient) utils.MessageBus {
 	if rc == nil {
 		return nil
 	}
-	return utils.NewRedisMessageBus(rc)
+	return utils.NewRedisMessageBus(*rc)
 }
 
-func createStore(rc *redis.Client) ObjectStore {
+func createStore(rc redisClient.RedisClient) ObjectStore {
 	if rc != nil {
 		return NewRedisStore(rc)
 	}

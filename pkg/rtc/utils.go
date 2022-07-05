@@ -9,8 +9,8 @@ import (
 	"github.com/go-logr/logr"
 	"github.com/pion/webrtc/v3"
 
-	"github.com/livekit/protocol/livekit"
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/livekit"
+	"github.com/tomxiong/protocol/logger"
 
 	"github.com/livekit/livekit-server/pkg/rtc/types"
 )

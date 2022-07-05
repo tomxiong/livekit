@@ -5,7 +5,7 @@ import (
 	"github.com/pion/logging"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/logger"
 
 	"github.com/livekit/livekit-server/pkg/config"
 )

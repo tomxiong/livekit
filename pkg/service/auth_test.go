@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/livekit/protocol/auth"
-	"github.com/livekit/protocol/auth/authfakes"
+	"github.com/tomxiong/protocol/auth"
+	"github.com/tomxiong/protocol/auth/authfakes"
 
 	"github.com/livekit/livekit-server/pkg/service"
 )

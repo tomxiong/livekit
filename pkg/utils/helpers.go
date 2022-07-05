@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 )
 
 func SpatialLayerForQuality(quality livekit.VideoQuality) int32 {

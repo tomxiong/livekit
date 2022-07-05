@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/livekit/livekit-server/pkg/service"
-	"github.com/livekit/protocol/livekit"
+	"github.com/tomxiong/protocol/livekit"
 )
 
 type FakeObjectStore struct {

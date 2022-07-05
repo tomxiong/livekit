@@ -14,7 +14,7 @@ import (
 	"github.com/urfave/cli/v2"
 
 	serverlogger "github.com/livekit/livekit-server/pkg/logger"
-	"github.com/livekit/protocol/logger"
+	"github.com/tomxiong/protocol/logger"
 
 	"github.com/livekit/livekit-server/pkg/config"
 	"github.com/livekit/livekit-server/pkg/routing"
