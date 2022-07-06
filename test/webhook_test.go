@@ -19,10 +19,10 @@ import (
 	"github.com/tomxiong/protocol/utils"
 	"github.com/tomxiong/protocol/webhook"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/service"
-	"github.com/livekit/livekit-server/pkg/testutils"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/service"
+	"github.com/tomxiong/livekit/pkg/testutils"
 )
 
 func TestWebhooks(t *testing.T) {

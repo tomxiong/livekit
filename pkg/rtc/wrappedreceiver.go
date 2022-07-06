@@ -9,7 +9,7 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/sfu"
+	"github.com/tomxiong/livekit/pkg/sfu"
 )
 
 // wrapper around WebRTC receiver, overriding its ID

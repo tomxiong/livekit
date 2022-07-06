@@ -12,8 +12,8 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	logging "github.com/livekit/livekit-server/pkg/logger"
+	"github.com/tomxiong/livekit/pkg/config"
+	logging "github.com/tomxiong/livekit/pkg/logger"
 )
 
 const (

@@ -8,9 +8,9 @@ import (
 	"github.com/tomxiong/protocol/logger"
 	"github.com/tomxiong/protocol/utils"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/routing/selector"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/routing/selector"
 )
 
 type StandardRoomAllocator struct {

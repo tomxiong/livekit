@@ -11,7 +11,7 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/service"
+	"github.com/tomxiong/livekit/pkg/service"
 )
 
 func TestParticipantPersistence(t *testing.T) {

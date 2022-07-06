@@ -11,8 +11,8 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/rtc/types"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/rtc/types"
 )
 
 func TestTrackInfo(t *testing.T) {

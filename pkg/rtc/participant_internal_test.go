@@ -12,12 +12,12 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/utils"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/routing/routingfakes"
-	"github.com/livekit/livekit-server/pkg/rtc/types"
-	"github.com/livekit/livekit-server/pkg/rtc/types/typesfakes"
-	"github.com/livekit/livekit-server/pkg/sfu/connectionquality"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/routing/routingfakes"
+	"github.com/tomxiong/livekit/pkg/rtc/types"
+	"github.com/tomxiong/livekit/pkg/rtc/types/typesfakes"
+	"github.com/tomxiong/livekit/pkg/sfu/connectionquality"
 )
 
 func TestIsReady(t *testing.T) {

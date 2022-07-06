@@ -308,7 +308,7 @@ func NewConfig(confString string, c *cli.Context) (*Config, error) {
 }
 
 func (conf *Config) HasRedis() bool {
-	return conf.Redis.Address != "" || conf.Redis.SentinelAddresses != nil
+	return conf.Redis.Address != "" || conf.Redis.SentinelAddresses != nil || conf.Redis.ClusterAddresses != nil
 }
 
 func (conf *Config) UseSentinel() bool {

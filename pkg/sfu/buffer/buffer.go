@@ -14,12 +14,12 @@ import (
 	"github.com/pion/webrtc/v3"
 	"go.uber.org/atomic"
 
-	"github.com/livekit/livekit-server/pkg/sfu/audio"
-	"github.com/livekit/livekit-server/pkg/sfu/twcc"
+	"github.com/tomxiong/livekit/pkg/sfu/audio"
+	"github.com/tomxiong/livekit/pkg/sfu/twcc"
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	dd "github.com/livekit/livekit-server/pkg/sfu/dependencydescriptor"
+	dd "github.com/tomxiong/livekit/pkg/sfu/dependencydescriptor"
 )
 
 const (

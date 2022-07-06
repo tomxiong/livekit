@@ -10,8 +10,8 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/sfu"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/sfu"
 )
 
 //go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -generate

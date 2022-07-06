@@ -15,12 +15,12 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/rtc/types"
-	"github.com/livekit/livekit-server/pkg/sfu"
-	"github.com/livekit/livekit-server/pkg/sfu/buffer"
-	"github.com/livekit/livekit-server/pkg/telemetry"
-	"github.com/livekit/livekit-server/pkg/utils"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/rtc/types"
+	"github.com/tomxiong/livekit/pkg/sfu"
+	"github.com/tomxiong/livekit/pkg/sfu/buffer"
+	"github.com/tomxiong/livekit/pkg/telemetry"
+	"github.com/tomxiong/livekit/pkg/utils"
 )
 
 const (

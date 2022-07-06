@@ -12,7 +12,7 @@ import (
 	"github.com/tomxiong/protocol/recording"
 	"github.com/tomxiong/protocol/utils"
 
-	"github.com/livekit/livekit-server/pkg/telemetry"
+	"github.com/tomxiong/livekit/pkg/telemetry"
 )
 
 type RecordingService struct {

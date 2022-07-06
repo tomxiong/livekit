@@ -18,9 +18,9 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/sfu/buffer"
-	"github.com/livekit/livekit-server/pkg/sfu/connectionquality"
-	dd "github.com/livekit/livekit-server/pkg/sfu/dependencydescriptor"
+	"github.com/tomxiong/livekit/pkg/sfu/buffer"
+	"github.com/tomxiong/livekit/pkg/sfu/connectionquality"
+	dd "github.com/tomxiong/livekit/pkg/sfu/dependencydescriptor"
 )
 
 // TrackSender defines an interface send media to remote peer

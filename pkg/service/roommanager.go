@@ -13,12 +13,12 @@ import (
 	"github.com/tomxiong/protocol/logger"
 	"github.com/tomxiong/protocol/utils"
 
-	"github.com/livekit/livekit-server/pkg/clientconfiguration"
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/rtc"
-	"github.com/livekit/livekit-server/pkg/rtc/types"
-	"github.com/livekit/livekit-server/pkg/telemetry"
+	"github.com/tomxiong/livekit/pkg/clientconfiguration"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/rtc"
+	"github.com/tomxiong/livekit/pkg/rtc/types"
+	"github.com/tomxiong/livekit/pkg/telemetry"
 )
 
 const (

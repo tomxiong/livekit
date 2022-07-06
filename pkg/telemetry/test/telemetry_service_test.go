@@ -8,8 +8,8 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/telemetry"
-	"github.com/livekit/livekit-server/pkg/telemetry/telemetryfakes"
+	"github.com/tomxiong/livekit/pkg/telemetry"
+	"github.com/tomxiong/livekit/pkg/telemetry/telemetryfakes"
 )
 
 type telemetryServiceFixture struct {

@@ -15,8 +15,8 @@ import (
 	"github.com/tomxiong/protocol/auth"
 	"github.com/tomxiong/protocol/utils"
 
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/service"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/service"
 )
 
 func generateKeys(_ *cli.Context) error {

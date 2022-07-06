@@ -17,9 +17,9 @@ import (
 	"github.com/urfave/negroni"
 	"go.uber.org/atomic"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/version"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/version"
 	"github.com/tomxiong/protocol/auth"
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"

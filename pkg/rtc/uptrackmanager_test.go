@@ -7,8 +7,8 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/rtc/types"
-	"github.com/livekit/livekit-server/pkg/rtc/types/typesfakes"
+	"github.com/tomxiong/livekit/pkg/rtc/types"
+	"github.com/tomxiong/livekit/pkg/rtc/types/typesfakes"
 )
 
 func TestUpdateSubscriptionPermission(t *testing.T) {

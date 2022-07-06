@@ -17,8 +17,8 @@ import (
 	"github.com/tomxiong/protocol/logger"
 	"github.com/tomxiong/protocol/utils"
 
-	"github.com/livekit/livekit-server/pkg/routing/selector"
-	"github.com/livekit/livekit-server/pkg/telemetry/prometheus"
+	"github.com/tomxiong/livekit/pkg/routing/selector"
+	"github.com/tomxiong/livekit/pkg/telemetry/prometheus"
 )
 
 const (

@@ -8,11 +8,11 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/routing/routingfakes"
-	"github.com/livekit/livekit-server/pkg/service"
-	"github.com/livekit/livekit-server/pkg/service/servicefakes"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/routing/routingfakes"
+	"github.com/tomxiong/livekit/pkg/service"
+	"github.com/tomxiong/livekit/pkg/service/servicefakes"
 )
 
 func TestCreateRoom(t *testing.T) {

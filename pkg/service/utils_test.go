@@ -6,7 +6,7 @@ import (
 	"github.com/go-redis/redis/v8"
 	"github.com/stretchr/testify/require"
 
-	"github.com/livekit/livekit-server/pkg/service"
+	"github.com/tomxiong/livekit/pkg/service"
 	redisClient "github.com/tomxiong/protocol/utils/redis"
 )
 

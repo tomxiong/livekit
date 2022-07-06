@@ -15,7 +15,7 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/config"
+	"github.com/tomxiong/livekit/pkg/config"
 )
 
 const (

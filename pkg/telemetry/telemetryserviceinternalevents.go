@@ -11,7 +11,7 @@ import (
 	"github.com/tomxiong/protocol/utils"
 	"github.com/tomxiong/protocol/webhook"
 
-	"github.com/livekit/livekit-server/pkg/telemetry/prometheus"
+	"github.com/tomxiong/livekit/pkg/telemetry/prometheus"
 )
 
 func (t *telemetryServiceInternal) RoomStarted(ctx context.Context, room *livekit.Room) {

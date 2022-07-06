@@ -9,7 +9,7 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/webhook"
 
-	"github.com/livekit/livekit-server/pkg/telemetry/prometheus"
+	"github.com/tomxiong/livekit/pkg/telemetry/prometheus"
 )
 
 const maxWebhookWorkers = 50

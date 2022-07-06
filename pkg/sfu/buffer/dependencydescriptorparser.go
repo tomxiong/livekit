@@ -5,7 +5,7 @@ import (
 
 	"github.com/pion/rtp"
 
-	dd "github.com/livekit/livekit-server/pkg/sfu/dependencydescriptor"
+	dd "github.com/tomxiong/livekit/pkg/sfu/dependencydescriptor"
 
 	"github.com/tomxiong/protocol/logger"
 )

@@ -13,13 +13,13 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	serverlogger "github.com/livekit/livekit-server/pkg/logger"
+	serverlogger "github.com/tomxiong/livekit/pkg/logger"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/service"
-	"github.com/livekit/livekit-server/version"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/service"
+	"github.com/tomxiong/livekit/version"
 )
 
 func init() {

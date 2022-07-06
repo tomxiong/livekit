@@ -6,7 +6,7 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/routing"
 )
 
 func TestMessageChannel_WriteMessageClosed(t *testing.T) {

@@ -4,8 +4,8 @@ package typesfakes
 import (
 	"sync"
 
-	"github.com/livekit/livekit-server/pkg/rtc/types"
-	"github.com/livekit/livekit-server/pkg/sfu"
+	"github.com/tomxiong/livekit/pkg/rtc/types"
+	"github.com/tomxiong/livekit/pkg/sfu"
 	"github.com/tomxiong/protocol/livekit"
 )
 

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/livekit/livekit-server/pkg/sfu/buffer"
-	dd "github.com/livekit/livekit-server/pkg/sfu/dependencydescriptor"
+	"github.com/tomxiong/livekit/pkg/sfu/buffer"
+	dd "github.com/tomxiong/livekit/pkg/sfu/dependencydescriptor"
 	"github.com/tomxiong/protocol/logger"
 )
 

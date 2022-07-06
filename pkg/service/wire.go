@@ -21,10 +21,10 @@ import (
 	"github.com/tomxiong/protocol/utils"
 	"github.com/tomxiong/protocol/webhook"
 
-	"github.com/livekit/livekit-server/pkg/clientconfiguration"
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/pkg/telemetry"
+	"github.com/tomxiong/livekit/pkg/clientconfiguration"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/pkg/telemetry"
 	redisClient "github.com/tomxiong/protocol/utils/redis"
 )
 

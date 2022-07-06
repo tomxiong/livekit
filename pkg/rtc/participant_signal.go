@@ -8,8 +8,8 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/routing"
-	"github.com/livekit/livekit-server/version"
+	"github.com/tomxiong/livekit/pkg/routing"
+	"github.com/tomxiong/livekit/version"
 )
 
 func (p *ParticipantImpl) GetResponseSink() routing.MessageSink {

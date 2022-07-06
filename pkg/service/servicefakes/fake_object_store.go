@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/livekit/livekit-server/pkg/service"
+	"github.com/tomxiong/livekit/pkg/service"
 	"github.com/tomxiong/protocol/livekit"
 )
 

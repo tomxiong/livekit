@@ -9,8 +9,8 @@ import (
 	"github.com/tomxiong/protocol/auth"
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/rtc"
-	"github.com/livekit/livekit-server/pkg/testutils"
+	"github.com/tomxiong/livekit/pkg/rtc"
+	"github.com/tomxiong/livekit/pkg/testutils"
 )
 
 func TestMultiNodeRouting(t *testing.T) {

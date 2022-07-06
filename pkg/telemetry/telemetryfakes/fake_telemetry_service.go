@@ -5,7 +5,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/livekit/livekit-server/pkg/telemetry"
+	"github.com/tomxiong/livekit/pkg/telemetry"
 	"github.com/tomxiong/protocol/livekit"
 )
 

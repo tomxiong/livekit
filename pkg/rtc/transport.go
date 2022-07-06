@@ -19,12 +19,12 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	serverlogger "github.com/livekit/livekit-server/pkg/logger"
-	"github.com/livekit/livekit-server/pkg/rtc/types"
-	"github.com/livekit/livekit-server/pkg/sfu"
-	"github.com/livekit/livekit-server/pkg/telemetry"
-	"github.com/livekit/livekit-server/pkg/telemetry/prometheus"
+	"github.com/tomxiong/livekit/pkg/config"
+	serverlogger "github.com/tomxiong/livekit/pkg/logger"
+	"github.com/tomxiong/livekit/pkg/rtc/types"
+	"github.com/tomxiong/livekit/pkg/sfu"
+	"github.com/tomxiong/livekit/pkg/telemetry"
+	"github.com/tomxiong/livekit/pkg/telemetry/prometheus"
 )
 
 const (

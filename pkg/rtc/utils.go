@@ -12,7 +12,7 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/rtc/types"
+	"github.com/tomxiong/livekit/pkg/rtc/types"
 )
 
 const (

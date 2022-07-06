@@ -22,7 +22,7 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/rtc"
+	"github.com/tomxiong/livekit/pkg/rtc"
 )
 
 const (

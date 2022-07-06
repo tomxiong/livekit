@@ -6,7 +6,7 @@ import (
 	"github.com/mackerelio/go-osstat/loadavg"
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/livekit/livekit-server/pkg/config"
+	"github.com/tomxiong/livekit/pkg/config"
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/utils"
 )

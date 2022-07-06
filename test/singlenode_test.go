@@ -16,10 +16,10 @@ import (
 	"github.com/tomxiong/protocol/livekit"
 	"github.com/tomxiong/protocol/logger"
 
-	"github.com/livekit/livekit-server/pkg/config"
-	"github.com/livekit/livekit-server/pkg/rtc"
-	"github.com/livekit/livekit-server/pkg/testutils"
-	testclient "github.com/livekit/livekit-server/test/client"
+	"github.com/tomxiong/livekit/pkg/config"
+	"github.com/tomxiong/livekit/pkg/rtc"
+	"github.com/tomxiong/livekit/pkg/testutils"
+	testclient "github.com/tomxiong/livekit/test/client"
 )
 
 func TestClientCouldConnect(t *testing.T) {

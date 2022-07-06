@@ -8,7 +8,7 @@ import (
 
 	"github.com/tomxiong/protocol/livekit"
 
-	"github.com/livekit/livekit-server/pkg/routing/selector"
+	"github.com/tomxiong/livekit/pkg/routing/selector"
 )
 
 func TestIsAvailable(t *testing.T) {
