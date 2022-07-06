@@ -1,4 +1,4 @@
-module github.com/livekit/livekit-server
+module github.com/tomxiong/livekit-server
 
 go 1.17
 
