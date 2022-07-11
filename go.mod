@@ -35,7 +35,7 @@ require (
 	github.com/sebest/xff v0.0.0-20210106013422-671bd2870b3a
 	github.com/stretchr/testify v1.7.1
 	github.com/thoas/go-funk v0.8.0
-	github.com/tomxiong/protocol v0.1.6
+	github.com/tomxiong/protocol v0.1.7
 	github.com/twitchtv/twirp v8.1.0+incompatible
 	github.com/ua-parser/uap-go v0.0.0-20211112212520-00c877edfe0f
 	github.com/urfave/cli/v2 v2.3.0
