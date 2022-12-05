@@ -1,4 +1,4 @@
-FROM golang:1.19-alpine as builder
+FROM golang:1.19-bullseye as builder
 
 ARG TARGETPLATFORM
 ARG TARGETARCH
@@ -22,7 +22,7 @@ COPY version/ version/
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH GO111MODULE=on go build -a -o livekit-server ./cmd/server
 
-FROM alpine
+FROM jgoerzen/debian-base-standard
 
 COPY --from=builder /workspace/livekit-server /livekit-server
 
